@@ -13,9 +13,10 @@ const res: [string] = [""];
 
 type LocalFS = {
   VFS: VFS | null;
+  FD: number | null;
 }
 
-const localVFS: LocalFS = { VFS: null };
+const localVFS: LocalFS = { VFS: null, FD: null };
 
 const path = "./test2.db";
 
@@ -23,7 +24,7 @@ async function initVFS() {
   const vfs = new VFS();
   await vfs.ready;
   localVFS.VFS = vfs;
-  vfs.open(path);
+  localVFS.FD = vfs.open(path);
   return vfs;
 }
 
@@ -56,7 +57,10 @@ export default define.page(function Home() {
 
   results?.forEach(r => res.push(r[1]));
 
-  console.log(results);
+  console.log("results: ", results, "LocalVFS: ", localVFS);
+
+  //Does not work
+  //localVFS.VFS?.close(localVFS.FD);
 
   localVFS.VFS?.worker.terminate();
 

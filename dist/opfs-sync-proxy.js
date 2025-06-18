@@ -72,7 +72,7 @@ async function handleOpen(path) {
   try {
     // Try to open existing file first
     let file;
-    try {
+    /* try {
       file = await Deno.open(fullPath, { read: true, write: true });
     } catch (error) {
       // If file doesn't exist, create it
@@ -85,7 +85,7 @@ async function handleOpen(path) {
       } else {
         throw error;
       }
-    }
+    } */
     
     handles.set(fd, { file, path: fullPath });
     log(`Opened file: ${fullPath} with fd: ${fd}`);
@@ -101,7 +101,7 @@ function handleClose(fd) {
   if (!handle) {
     throw new Error(`Invalid file descriptor: ${fd}`);
   }
-  
+  log(`handle: ${handle}`);
   handle.file.close();
   handles.delete(fd);
   log(`Closed fd: ${fd}`);
