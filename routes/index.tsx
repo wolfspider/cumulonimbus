@@ -32,8 +32,8 @@ async function initAll() {
   await initVFS();
   await init();
 }
-
-await initAll();
+if (!Deno.args.includes("build"))
+  await initAll();
 
 export default define.page(function Home() {
   const count = useSignal(3);
