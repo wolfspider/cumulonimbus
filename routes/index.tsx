@@ -3,7 +3,7 @@ import { useSignal } from "@preact/signals";
 import { define } from "../utils.ts";
 import Counter from "../islands/Counter.tsx";
 
-import { VFS } from "../dist/opfs.js";
+import { VFS } from "../dist/opfs.ts";
 import init, { Database } from "../dist/index.js";
 
 let db: Database | null = null;
@@ -62,7 +62,7 @@ export default define.page(function Home() {
   //Does not work
   //localVFS.VFS?.close(localVFS.FD);
 
-  localVFS.VFS?.worker.terminate();
+  //localVFS.VFS?.worker.terminate();
 
   console.log(res);
 
